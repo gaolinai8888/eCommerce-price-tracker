@@ -13,13 +13,7 @@ import React from "react";
 //   params: { id: string };
 // };
 
-const ProductDetails = async ({
-  params: { id },
-  searchParams,
-}: {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}) => {
+const ProductDetails = async ({ params: { id } }: any) => {
   const product: Product = await getProductById(id);
 
   if (!product) redirect("/");
