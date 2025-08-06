@@ -14,7 +14,7 @@ type Props = {
 };
 
 const ProductDetails = async (props: Props) => {
-  const { id } = await props.params;
+  const { id } = props.params;
 
   const product: Product = await getProductById(id);
 
