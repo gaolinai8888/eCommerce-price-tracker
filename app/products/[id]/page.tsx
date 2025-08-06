@@ -15,8 +15,10 @@ import React from "react";
 
 const ProductDetails = async ({
   params: { id },
+  searchParams,
 }: {
   params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   const product: Product = await getProductById(id);
 
