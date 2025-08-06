@@ -2,6 +2,7 @@
 
 import { EmailContent, EmailProductInfo, NotificationType } from "@/types";
 import nodemailer from "nodemailer";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 const Notification = {
   WELCOME: "WELCOME",
@@ -81,22 +82,21 @@ export async function generateEmailBody(
 }
 
 const transporter = nodemailer.createTransport({
-  pool: true,
-  service: "hotmail",
-  port: 2525,
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
-    user: "linai_gao@outlook.com",
-    pass: process.env.EMAIL_PASSWORD,
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD,
   },
-  maxConnections: 1,
-});
+} as SMTPTransport.Options);
 
 export const sendEmail = async (
   emailContent: EmailContent,
   sendTo: string[]
 ) => {
   const mailOptions = {
-    from: "linai_gao@outlook.com",
+    from: process.env.GMAIL_USER,
     to: sendTo,
     html: emailContent.body,
     subject: emailContent.subject,
